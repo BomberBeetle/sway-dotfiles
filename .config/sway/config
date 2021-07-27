@@ -18,7 +18,7 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu rofi -modi "run,drun" -show drun | xargs swaymsg exec --
+set $menu wofi -modi "run,drun" --show drun | xargs swaymsg exec --
 
 exec gammastep-indicator -l -23.54:-46.64
 exec blueman-applet
@@ -232,6 +232,8 @@ bindsym XF86AudioPrev exec playerctl previous
 #bindsym XF86Search exec bemenu-run
 #i dont use bemenu so this stays commented lol
 
+bindsym $mod+t exec pavucontrol
+
 #titlebar stuff
 title_align center
 font Fira Sans
@@ -258,3 +260,8 @@ client.focused_inactive $border-u $bg-u $text-u $ind-u $child-border-u
 client.unfocused $border-u $bg-u $text-u $ind-u $child-border-u 	
 
 include /etc/sway/config.d/*
+exec pipewire
+exec export XDG_CURRENT_DESKTOP=sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+exec systemctl --user start pipewire-media-session
