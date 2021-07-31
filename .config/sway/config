@@ -18,7 +18,7 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi -modi "run,drun" --show drun | xargs swaymsg exec --
+set $menu wofi -modi "run,drun" --show "drun,run" | xargs swaymsg exec --
 
 exec gammastep-indicator -l -23.54:-46.64
 exec blueman-applet
@@ -93,22 +93,14 @@ output * bg ~/wallpapers/Ch_3_Cover.png fill
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+    bindsym $mod+ccedilla focus right
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+    bindsym $mod+Shift+ccedilla move right
 #
 # Workspaces:
 #
@@ -186,11 +178,7 @@ mode "resize" {
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym ccedilla resize grow width 10px
 
     # Return to default mode
     bindsym Return mode "default"
@@ -242,6 +230,7 @@ font Fira Sans
 set $border #2b1700
 set $border-u #160e05
 
+
 set $bg #4c2f0e
 set $bg-u #160e05
 
@@ -259,9 +248,11 @@ client.focused $border $bg $text $ind $child-border
 client.focused_inactive $border-u $bg-u $text-u $ind-u $child-border-u
 client.unfocused $border-u $bg-u $text-u $ind-u $child-border-u 	
 
+#rez goes here
+
+output DVI-D-0 pos 0 0 res 1600x900@76Hz
+exec xrandr --newmode "1600x900_76.00"  153.50  1600 1704 1872 2144  900 903 908 943 -hsync +vsync
+exec xrandr --addmode XWAYLAND0 "1600x900_76.00"
+exec xrandr --output XWAYLAND0 --mode 1600x900_76.00
+
 include /etc/sway/config.d/*
-exec pipewire
-exec export XDG_CURRENT_DESKTOP=sway
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-exec systemctl --user start pipewire-media-session

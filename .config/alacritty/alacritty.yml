@@ -3,3 +3,4 @@ shell:
 font:
   normal:
     family: Fira Mono
+background_opacity: 0.9
