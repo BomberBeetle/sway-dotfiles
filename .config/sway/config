@@ -1,8 +1,9 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+exec wal -R
+exec pywal-discord
+
+include "$HOME/.cache/wal/colors-sway"
+
+output * background $wallpaper fill
 
 ### Variables
 #
@@ -19,19 +20,10 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu wofi -modi "run,drun" --show "drun,run" | xargs swaymsg exec --
+set $wallpaper ~/Pictures/DzNT32SVAAU2o1D.jpg
 
 exec gammastep-indicator -l -23.54:-46.64
 exec blueman-applet
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/wallpapers/Ch_3_Cover.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration
 #
@@ -84,7 +76,7 @@ output * bg ~/wallpapers/Ch_3_Cover.png fill
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'ja acabou jessica' -b 'claro' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -244,15 +236,17 @@ set $child-border #000000
 set $child-border-u #000000
 
 #use the collers
-client.focused $border $bg $text $ind $child-border 
-client.focused_inactive $border-u $bg-u $text-u $ind-u $child-border-u
-client.unfocused $border-u $bg-u $text-u $ind-u $child-border-u 	
+client.focused $color0 $background $color3 $color7 $background 
+client.focused_inactive $color0 $background $foreground $color7 $background
+client.unfocused $color0 $background $color4 $ind-u $child-border-u 	
 
 #rez goes here
 
-output DVI-D-0 pos 0 0 res 1600x900@76Hz
-exec xrandr --newmode "1600x900_76.00"  153.50  1600 1704 1872 2144  900 903 908 943 -hsync +vsync
-exec xrandr --addmode XWAYLAND0 "1600x900_76.00"
-exec xrandr --output XWAYLAND0 --mode 1600x900_76.00
+output DP-2 pos 1600 0 res 1440x900@60.000Hz
+output DVI-D-1 pos 0 0 res 1600x900@76.040Hz
+
+exec export QT_QPA_PLATFORMTHEME=qt5ct
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK DBUS_SESSION_BUS_ADDRESS
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK DBUS_SESSION_BUS_ADDRESS
 
 include /etc/sway/config.d/*

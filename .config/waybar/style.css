@@ -1,3 +1,5 @@
+@import url('file:///home/xdre/.cache/wal/colors-waybar.css');
+
 * {
     border: none;
     border-radius: 0;
@@ -131,18 +133,23 @@ label:focus {
     background-color: #000000;
 }
 
+#language{
+	background-color: @background;
+	color: @foreground;
+	min-width: 200px;
+}
+
 #cpu,
 #memory,
 #network,
-#language,
 #clock,
 #battery,
 #pulseaudio,
 #idle_inhibitor,
 #disk
 {
-    background-color: #4c2f0e;
-    color: #b5fcc0;
+    background-color: @background;
+    color: @foreground;
 }
 
 #backlight {
@@ -182,7 +189,7 @@ label:focus {
 }
 
 #tray {
-    background-color: #4c2f0e;
+    background-color: @background;
 }
 
 #tray > .passive {
@@ -217,7 +224,7 @@ label:focus {
 #language {
     padding: 0 5px;
     margin: 0 5px;
-    min-width: 20px;
+    min-width: 50px;
 }
 
 #keyboard-state {
