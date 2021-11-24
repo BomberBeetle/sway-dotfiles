@@ -19,7 +19,10 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi -modi "run,drun" --show "drun,run" | xargs swaymsg exec --
+
+set $menu nwgdmenu -ha l -va b | xargs swaymsg exec --
+set $grid nwggrid | xargs swaymsg exec --
+
 set $wallpaper ~/Pictures/DzNT32SVAAU2o1D.jpg
 
 exec gammastep-indicator -l -23.54:-46.64
@@ -64,6 +67,7 @@ exec blueman-applet
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+Shift+d exec $grid
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -183,6 +187,7 @@ input * {
 	xkb_options "grp:win_space_toggle"
 }
 
+input 10429:117:XP-PEN_G430S_Pen map_to_output DVI-D-1
 #
 # Status Bar:
 #
